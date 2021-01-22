@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Бургер Кинг</title>
+</head>
+<body>
+    <h1>Бургер кинг</h1>
+    <h2>Создай свой бургер</h2>
+    <form>
+        <h3>Выберите размер бургера</h3>
+        <fieldset name="size">
+            <legend>Размер</legend>
+            <input type="radio" id ='small' name="size" value="small" data-price='50' data-calories='20' checked>
+            <label for="small">Маленький</label>
+            <input type="radio" id="big" name="size" value="big" data-price='100' data-calories='40'>
+            <label for="big">Большой</label>
+        </fieldset>
+        <h3>Выберите начинку для бургера</h3>
+        <fieldset name="stuff">
+            <legend>Начинка</legend>
+            <input type="checkbox" id="cheese" name="stuff" data-price='10' data-calories='20'>
+            <label for="cheese">С сыром</label><br>
+            <input type="checkbox" id="salad" name="stuff" data-price='20' data-calories='5'>
+            <label for="salad">С салатом</label><br>
+            <input type="checkbox" id="potato" name="stuff" data-price='15' data-calories='10'>
+            <label for="potato">С картошкой</label>
+        </fieldset>
+        <h3>Выберите добавки</h3>
+        <fieldset name="topping">
+            <legend>Добавки</legend>
+            <input type="checkbox" id="spices" name="topping" data-price='5' data-calories='0'>
+            <label for="spices">Посыпать приправой</label><br>
+            <input type="checkbox" id="ketchup" name="topping" data-price='10' data-calories='5'>
+            <label for="ketchup">Полить кетчупом</label>
+        </fieldset>
+        <button type="submit" value="calculate">Рассчитать</button>
+        <button type="reset" value="reset">Сброс</button>
+    </form>
+    <div class="result">
+        <p>Цена:<span id='price'>0</span></p>
+        <p>Калорийность:<span id='calories'>0</span></p>
+    </div>
+    <script src="JSCode.js"></script>
+    <script>
+        window.onload = () =>{
+            document.querySelector('button[value="calculate"]').addEventListener('click', (event)=>{
+                event.preventDefault();
+                let Burger = new Hamburger('size', 'stuff', 'topping');
+                Burger.showSum('#price', '#calories');
+            });
+        }
+    </script>
+</body>
+</html>

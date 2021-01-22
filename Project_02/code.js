@@ -28,7 +28,7 @@ let data = fetchData(); // Массив объектов для создания
 function fetchProducts () {
     let arr = [];
     for (let i = 0; i < items.length; i++) {
-        arr.push (new Product (i));
+        arr.push (new Product (data[i]));
     }
     return arr
 };
@@ -70,6 +70,37 @@ class ProductsList{
         })
     }
 }
+class CartItem{
+    constructor(product){
+        this.name = product.dataset ['name'];
+        this.id = +product.dataset['id'];
+        this.img = cartImage;
+        this.price = +product.dataset['price'];
+        this.quantity = 1;
+    }
+    render(){
+        const block = document.querySelector(".cart");
+        // this.products.forEach(element =>{
+        //     block.innerHTML += element.template  логика отрисовки элемента корзины
+        //})
+    }
+}
+class Cart{
+    constructor(){
+        this.cartItems = [];
+    }
+    addCartItem(product){
+
+    }
+    removeCartItem(product){
+
+    }
+    totalCost(cartItems){
+        
+    }
+}
+
+
 
 let list = new ProductsList();
 list.render();

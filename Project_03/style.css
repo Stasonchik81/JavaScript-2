@@ -1,0 +1,21 @@
+body{
+    font-family: 'SF Pro Display', sans-serif;
+}
+header{
+    height: 150px;
+    background-color: burlywood;
+}
+main{
+    height: 500px;
+    background-color: rgb(219, 250, 219);
+    padding: 10px;
+}
+.goods-item{
+    width: 100px;
+    margin-right: 10px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    float: left;
+}
