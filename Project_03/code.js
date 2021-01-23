@@ -1,21 +1,34 @@
-const goods = [
-    { title: 'Shirt', price: 150 },
-    { title: 'Socks', price: 50 },
-    { title: 'Jacket', price: 350 },
-    { title: 'Shoes', price: 250 },
-  ];
+function makeGetRequest(url, callback){
+    var xhr;
+    if (window.XMLHttpRequest){
+        xhr = new XMLHttpRequest();
+    } else if (window.ActiveXObject){
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState === 4){
+            callback(xhr.responseText);
+        }
+    }
+    xhr.open('GET', url, true);
+    xhr.send();
+}
   
 class GoodList{
     constructor(){
         this.goods = [];
     }
-    fetchGoods(){
-        this.goods = goods;
+    fetchGoods(cb){
+        const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
+        makeGetRequest(`${API_URL}/catalogData.json`, (goods) => {
+            this.goods = JSON.parse(goods);
+            cb();
+        });
     }
     render(){
         let list = '';
         this.goods.forEach(el => {
-            const item = new GoodsItem(el.title, el.price);
+            const item = new GoodsItem(el.product_name, el.price);
             list += item.render();
         })
         document.querySelector('.goods-list').innerHTML = list;
@@ -63,6 +76,6 @@ class CartItem{
     }
 }
 const List = new GoodList();
-List.fetchGoods();
-List.render();
+List.fetchGoods(() => {List.render()});
+
 console.log(List.totalCost());
