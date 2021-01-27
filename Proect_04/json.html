@@ -7,6 +7,7 @@
 </head>
 <body>
     <script>
+        /*
         function makeGetRequest(url, callback){
             var xhr;
             if (window.XMLHttpRequest){
@@ -27,7 +28,70 @@
         makeGetRequest(`${API_URL}/catalogData.json`, (good) => {
             goods = JSON.parse(good);
         });
-        debugger
+        */
+        // Описание колбэка
+       /* const async = (a, cb) => {
+            setTimeout(() => {
+                const b = a + 1;
+                cb(b);
+            }, 200);
+        }
+        async (5, () => {
+            console.log(b);
+        })
+        // Описание промиса
+        const async = (a) => {
+            const promise = new Promise((resolv, reject) => {
+                setTimeout(() => {
+                    if(a) {
+                        const b = a + 1;
+                        resolv (b);
+                    }
+                    else{
+                        reject ('Error');
+                    }
+                }, 200)
+            })
+        }
+        async(5).then((b) => {
+            console.log(b);
+        }, (error) => {
+            console.log(error);
+        });
+*/
+        function makeGetRequest(url){
+            return new Promise((resolve) => {
+                var xhr;
+                if (window.XMLHttpRequest){
+                xhr = new XMLHttpRequest();
+                } else if (window.ActiveXObject){
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                xhr.onreadystatechange = function () {
+                    if(xhr.readyState === 4){
+                    resolve(xhr.responseText);
+                    }
+                }
+                xhr.open('GET', url, true);
+                xhr.send();
+            })   
+        }
+        const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
+        let goods = null;
+        makeGetRequest(`${API_URL}/catalogData.json`).then((good) => {
+            goods = JSON.parse(good);
+        });
+
+        const giveMeNumber = (number) => {
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(number), 200);
+            });
+        }
+        giveMeNumber(5)
+        .then((number) => {return number+4})
+        .then((number) => {return number+3})
+        .then((number) => {console.log(number+2)})
+
     </script>
 </body>
 </html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects</title>
+</head>
+<body>
+    <!-- <h1 id="first">Заголовок 1 уровня</h1> -->
+    <script>
+        // function getSecret(file, secretPassword){
+        //     file.opened += 1;
+        //     if (secretPassword === file.password){
+        //         return file.contents;
+        //     }
+        //     else{
+        //         return 'Invalid password!'
+        //     }
+        // }
+
+        // function setSecret(file, secretPassword, secret){
+        //     if(secretPassword = file.password){
+        //         file.opened = 0;
+        //         file.contents = secret;
+        //     }
+        // }
+
+        // let superSecretFile = {
+        //     level: "classified",
+        //     opened: 0,
+        //     password: "1234",
+        //     contents: "Dr. Evel's next meeting is in Detroit"
+        // }
+        // let secret = getSecret(superSecretFile, "1234");
+        // console.log(secret);
+        // setSecret(superSecretFile, '1234', "Dr. Evel's next meeting is in Philadelphia.");
+        // secret = getSecret(superSecretFile, "1234");
+        // console.log(secret);
+        
+            let firm = ['mersedes', 'volvo', 'BMW', 'AUDI', 'Volksvagen'];
+            let body = ['sedan', 'cope', 'hatchback', 'minivan', 'crossover'];
+            let transmission = ['mechanical', 'robotic', 'automatic'];
+            let actuator = ['front-wheel', 'rear-wheel'];
+            let color = ['white', 'black', 'green', 'red', 'grey', 'braun'];
+            let hasInsurance = [false, true];
+        
+            class Car{
+                constructor() {
+                this.firm = firm[Math.floor(Math.random() * firm.length)];
+                this.body = body[Math.floor(Math.random() * body.length)];
+                this.transmission = transmission[Math.floor(Math.random() * transmission.length)];
+                this.actuator = actuator[Math.floor(Math.random() * 2)];
+                this.color = color[Math.floor(Math.random() * color.length)];
+                this.pasengers = Math.floor(Math.random() * 4) + 2;
+                this.hasInsurance = hasInsurance[Math.floor(Math.random() * 2)]
+            }
+            displayCar(){
+               //console.log(`Моя новая тачка: ${this.firm} цвета ${this.color}`);
+               for(let prop in this){
+                   if(prop == 'firm' || prop == 'color'){
+                    console.log(`${prop}: ${this[prop]}`);
+                   }
+               }
+               return this;
+            }
+            to_Insure(){
+                if(this.hasInsurance === true){
+                    return;
+                }
+                else{
+                    this.hasInsurance = true;
+                }
+            }
+        }
+        function cloneCars(count){
+            let garage = [];
+            for(let i = 0; i<count; i++){
+                let car = new Car();
+                // if(!car.hasInsurance)
+                // {
+                //     car.to_Insure();
+                // }
+                garage.push(car);
+            }
+            return garage;
+        }
+        let my_garage = cloneCars(10);
+        console.log(my_garage);
+        let insuredCars = my_garage.filter(el => {
+            return el.hasInsurance === true;
+        })
+        for(car of insuredCars){
+            car.displayCar();
+        };
+        let eightBall = {
+            index: 0,
+            advise: ['yes', 'no', 'maybe'],
+            shake () {
+                this.index += 1;
+                if(this.index > this.advise.length){
+                    this.index = 0;
+                }
+            },
+        }
+        function x(){
+            setTimeout(() => {
+                let h1 = document.getElementById('first'); 
+            h1.innerHTML = 'Новый заголовок';
+            }, 3000)
+            
+        }
+        function change(){
+            let h1 = document.getElementById('first');
+            h1.innerHTML = 'Новый заголовок2';
+        }
+        window.onload();
+        
+    </script>
+    <h1 id="first">Заголовок 1 уровня</h1>
+</body>
+</html>
