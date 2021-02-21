@@ -47,6 +47,23 @@ let renderer = {
         document.getElementById(location).classList.add('miss');
         let message = 'Ты промахнулся!';
         return message;
+    },
+    displayAll(ships){ // для ленивых (отобразить корабли на поле)
+        for(let i =0; i<model.ships.length; i++){
+            for(let j=0; j<model.shipLength; j++){
+                let loc = ships[i].body[j];
+                renderer.displayhit(loc);
+            }
+        }
+    },
+
+    clearAll(ships){ // для ленивых (спрятать корабли на поле)
+        for(let i =0; i<model.ships.length; i++){
+            for(let j=0; j<model.shipLength; j++){
+                let loc = ships[i].body[j];
+                document.getElementById(loc).classList.remove('hit');
+            }
+        }
     }
 
 }

@@ -3,10 +3,6 @@ window.onload = init;
 
 
 
-// let ship1 = new ship(['32', '33', '34'], ['', '', '']);
-// let ship2 = new ship(['10', '20', '30'], ['', '', '']);
-// let ship3 = new ship (['63', '64', '65'], ['', '', '']);
-// model.ships = [ship1, ship2, ship3];
 
 let controller = {
     guesses: 0,
@@ -80,6 +76,9 @@ function init(){
         buttonFire.onclick = handleFireButton;
         let guessInput = document.getElementById('guessInput');
         guessInput.onkeypress = handleKeyPress;
+        model.generateShipLocations();
+        // renderer.displayAll(model.ships);                // отобразить корабли
+        // setTimeout(renderer.clearAll, 5000, model.ships); // через 5 сек спрятать обратно
     }
     
 }
