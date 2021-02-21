@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <style>
+        body{margin: 10px; display: flex; flex-direction: row;}
+        div{width: 200px; height: 200px; border: 2px solid red; border-radius: 5px; margin-right: 10px;}
+        #firstblur{background-image: url(img/zeroblur.jpg); background-size: cover;}
+        #secondblur{background-image: url(img/oneblur.jpg); background-size: cover;}
+        #thirdblur{background-image: url(img/twoblur.jpg); background-size: cover;}
+        #fourthblur{background-image: url(img/threeblur.jpg); background-size: cover;}
+        #fifthblur{background-image: url(img/fourblur.jpg); background-size: cover;}
+        #sixthblur{background-image: url(img/fiveblur.jpg); background-size: cover;}
+        #first{background-image: url(img/zero.jpg); background-size: cover;}
+        #second{background-image: url(img/one.jpg); background-size: cover;}
+        #third{background-image: url(img/two.jpg); background-size: cover;}
+        #fourth{background-image: url(img/three.jpg); background-size: cover;}
+        #fifth{background-image: url(img/four.jpg); background-size: cover;}
+        #sixth{background-image: url(img/five.jpg); background-size: cover;}
+    </style>
+    <script>
+        window.onload = init;
+
+        function init(){
+            let images = document.getElementsByTagName('div');
+            for(let i=0; i<images.length; i++){
+                images[i].onclick = showFull;
+            }
+        }
+        function showFull(eventObject){
+           let id = eventObject.target.id;
+           let newId = id.replace("blur", '');
+           eventObject.target.setAttribute('id', newId);
+           setTimeout(()=>{eventObject.target.setAttribute('id', id)}, 3000);
+        }
+    </script>
+</head>
+<body>
+    <div id="firstblur"></div>
+    <div id="secondblur"></div>
+    <div id="thirdblur"></div>
+    <div id="fourthblur"></div>
+    <div id="fifthblur"></div>
+    <div id="sixthblur"></div>
+</body>
+</html>
