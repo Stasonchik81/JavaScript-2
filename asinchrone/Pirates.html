@@ -7,20 +7,54 @@
     <title>Pirates Booty</title>
     <script>
         window.onload = init;
+        
         function init(){
             let map = document.getElementById('map');
-            map.onmousemove = clickEventHandler;
+            map.onmousemove = moveEventHandler; //добавим элементу map обработчик движения мыши
+            let startButton = document.getElementById('start');
+            startButton.onclick = clickButtonHandler; // добавим кнопке старт обработчик нажатия
         }
-        function clickEventHandler(eventObject){
+        function moveEventHandler(eventObject){
             let map = document.getElementById('coords');
-            let x = eventObject.clientX;
-            let y = eventObject.clientY;
+            let x = eventObject.clientX; // присвоим переменным x y свойства события движения мыши
+            let y = eventObject.clientY;    // (положение указателя по осям относительно окна браузера)
             map.innerHTML = `Map coordinats:  x=${x}, y=${y}.`
         }
+        let tickTime = 10; // установим счётчик времени
+        function clickButtonHandler() {
+            let intervalId; // переменная для хранения объекта таймера
+            startTimer(print); // запускаем таймер
+
+        }
+
+        function print(){ // функция отображения таймера
+            let span = document.getElementById('mySpan');
+            span.innerHTML = `Timer - ${tickTime}sec!`; //пишем в span текущее значение счётчика времени
+            tickTime--; // уменьшаем счётчик времени
+            if(tickTime<0){ //когда счётчик времени станет меньше 0 остановим таймер
+                stopTimer();
+                span.innerHTML = `End of Time!`;//выведем текст 
+                let map = document.getElementById('map'); //сделаем невозможным отображение координат карты
+                map.onmousemove = null;
+            }
+        }
+        
+        function startTimer(func){ // функция запуска таймера (присваеваем объекту таймера setInterval)
+            intervalId = setInterval(func, 1000);
+        }
+        function stopTimer(){ // функция остановки таймера
+            clearInterval(intervalId); // очищаем объект таймера с помощью clearInterval
+        }
+        
+        
+        
+
     </script>
 </head>
 <body>
     <img src="img/map.jpg" alt="map" id="map">
     <p id="coords">Move mouse to find coordinates...</p>
+    <span id = "mySpan" style="color: red; text-shadow: saddlebrown 2px 1px; font-size: large; font-weight: bold;">У вас 10 секунд</span>
+    <div><button id="start" style="width: 50px; height: 20px; text-align: center;">start</button></div>
 </body>
 </html>
