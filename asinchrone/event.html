@@ -27,14 +27,21 @@
         function init(){
             let images = document.getElementsByTagName('div');
             for(let i=0; i<images.length; i++){
-                images[i].onclick = showFull;
+                //images[i].onclick = showFull;
+                images[i].onmouseover = showFull;
+                images[i].onmouseout = showBlur;
             }
         }
         function showFull(eventObject){
            let id = eventObject.target.id;
            let newId = id.replace("blur", '');
            eventObject.target.setAttribute('id', newId);
-           setTimeout(()=>{eventObject.target.setAttribute('id', id)}, 3000);
+           //setTimeout(()=>{eventObject.target.setAttribute('id', id)}, 3000);
+        }
+        function showBlur(eventObject){
+            let id = eventObject.target.id;
+            let newId = id+"blur";
+            eventObject.target.setAttribute('id', newId);
         }
     </script>
 </head>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.onload = init;
+        let passengers = [{ name: "Jane Doloop", paid: true, ticket: 'firstclass' },
+                            { name: "Dr. Evel", paid: true, ticket: 'coach' }, 
+                            { name: "Sue Property", paid: false, ticket: 'coach' },
+                            { name: "John Funcall", paid: true, ticket: 'firstclass' } ];
+        let blackList = ['Dr. Evel', 'Mr.Presedent', 'Jhonny_Valker'];
+        function isInBlackList(pass){
+            for(let i=0; i<blackList.length; i++){
+                return pass.name === blackList[i];
+            }
+        }
+
+        function isNoPaid(pass){
+            return !pass.paid;
+        }
+
+        function processPassengers(passengers, testFunc){
+            for(let i=0; i<passengers.length; i++){
+                if(testFunc(passengers[i])){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
+        function printPassenger(pass){
+            let paid;
+            pass.paid === true ? paid = 'оплачен' : paid ='неоплачен';
+            console.log(`Name: ${pass.name}, ticket - ${paid} `);
+            return false;
+        }
+        function serveCustomer(pass){
+            //предложить напитки
+            createDrinkOrder(pass);
+            //Предложить обед
+            //забрать мусор
+        }
+        function createDrinkOrder(pass){
+            if(pass.ticket === 'firstclass'){
+                alert('Would you like a cocktail or wine?');
+            }
+            else{
+                alert('Your choice is Cola or water?');
+            }
+        }
+
+        function init(){
+            processPassengers(passengers, printPassenger);
+        }
+    </script>
+    <title>Passengers</title>
+</head>
+<body>
+    
+</body>
+</html>
